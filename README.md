@@ -1,6 +1,6 @@
 # Android-Project-Template
 
-Template for new project creation with:
+Template for new project creation with: 
 
 - Basic file structure
 - Dependency Injection
