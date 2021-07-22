@@ -1,0 +1,143 @@
+name: Default Workflow
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+jobs:
+
+  ktlint:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Change wrapper permissions
+        run: chmod +x ./gradlew
+
+      - name: Restore Cache
+        uses: actions/cache@v2
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*') }}
+          restore-keys: |
+            ${{ runner.os }}-gradle-
+
+      - name: Run ktlinCheck
+        run: ./gradlew ktlintCheck
+
+  test_job:
+    runs-on: ubuntu-latest
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v2
+
+      - name: Setup JDK
+        uses: actions/setup-java@v1
+        with:
+          java-version: 1.8
+
+      - name: Change wrapper permissions
+        run: chmod +x ./gradlew
+
+      - name: Restore Cache
+        uses: actions/cache@v2
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*') }}
+          restore-keys: |
+            ${{ runner.os }}-gradle-
+
+      - name: Run Debug Tests
+        run: ./gradlew testDebugUnitTest --continue
+
+      - name: Upload Test Reports
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v2
+        with:
+          name: test-reports
+          path: '**/build/reports/tests/'
+
+  lint_job:
+    name: Lint
+    runs-on: ubuntu-latest
+    continue-on-error: true
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Change wrapper permissions
+        run: chmod +x ./gradlew
+
+      - name: Restore Cache
+        uses: actions/cache@v2
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*') }}
+          restore-keys: |
+            ${{ runner.os }}-gradle-
+      - name: Run Debug Lint
+        run: ./gradlew lintDebug
+
+      - name: Upload Lint Reports
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v2
+        with:
+          name: lint-report
+          path: '**/build/reports/lint-results-*'
+
+  assemble_job:
+    name: Assemble
+    runs-on: ubuntu-latest
+    continue-on-error: true
+    steps:
+
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Change wrapper permissions
+        run: chmod +x ./gradlew
+
+      - name: Restore Cache
+        uses: actions/cache@v2
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*') }}
+          restore-keys: |
+            ${{ runner.os }}-gradle-
+
+      - name: Restore Cache
+        uses: actions/cache@v2
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*') }}
+          restore-keys: |
+            ${{ runner.os }}-gradle-
+
+      - name: Run Debug Tests
+        run: ./gradlew testDebugUnitTest --continue
+
+      - name: Upload Test Reports
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v2
+        with:
+          name: test-reports
+          path: '**/build/reports/tests/'
+
+      - name: Build Project
+        run: ./gradlew assemble
