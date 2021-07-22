@@ -2,7 +2,7 @@
 
 Template for new project creation with:
 
-- Basic file structure
+[] Basic file structure
 - Dependency Injection
 - CI/CD pipeline
 - Pre-filled dependency list in the gradle file
