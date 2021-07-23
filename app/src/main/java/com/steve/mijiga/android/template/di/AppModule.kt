@@ -3,7 +3,8 @@ package com.steve.mijiga.android.template.di
 import android.content.Context
 import com.google.gson.GsonBuilder
 import com.steve.mijiga.android.template.api.AppAPI
-import com.steve.mijiga.android.template.utils.Constants.Companion.BASE_URL
+import com.steve.mijiga.android.template.utils.Constants.BASE_URL
+import com.steve.mijiga.android.template.utils.Constants.MAX_CACHE_SIZE
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -26,11 +27,12 @@ object AppModule {
     @Provides
     fun providesRetrofit(@ApplicationContext context: Context): AppAPI {
         val gson = GsonBuilder().setLenient().create()
+
         val retrofit = Retrofit.Builder()
             .client(
                 OkHttpClient()
                     .newBuilder()
-                    .cache(Cache(File(context.cacheDir, "offlineCache"), 10 * 1024 * 1024))
+                    .cache(Cache(File(context.cacheDir, "offlineCache"), MAX_CACHE_SIZE))
                     .addInterceptor(
                         HttpLoggingInterceptor().apply {
                             level = HttpLoggingInterceptor.Level.BODY

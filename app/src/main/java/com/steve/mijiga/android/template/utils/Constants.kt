@@ -1,9 +1,8 @@
 package com.steve.mijiga.android.template.utils
 
-class Constants {
+object Constants {
 
-    companion object {
+    const val BASE_URL = ""
 
-        const val BASE_URL = ""
-    }
+    const val MAX_CACHE_SIZE = 10485760L
 }
