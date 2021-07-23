@@ -1,9 +1,11 @@
 # Android-Project-Template
 
-A template to quickly create a new android project with the basics setup. 
+An android project template that simplifies new project creation. Clone and get straight into your project.
 
-Using the Kotlin language.
-Has out of the box setup for: 
+# Initial Setup 
+
+# Tech Stack 
+This template has out of the box setup for: 
 - Lint/Ktlint
 - Detekt for static code analysis
 - Dagger-Hilt for dependency injection
