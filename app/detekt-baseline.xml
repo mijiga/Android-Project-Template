@@ -1,0 +1,9 @@
+<?xml version="1.0" ?>
+<SmellBaseline>
+  <ManuallySuppressedIssues></ManuallySuppressedIssues>
+  <CurrentIssues>
+    <ID>MagicNumber:AppModule.kt$AppModule$10</ID>
+    <ID>MagicNumber:AppModule.kt$AppModule$1024</ID>
+    <ID>UtilityClassWithPublicConstructor:Constants.kt$Constants</ID>
+  </CurrentIssues>
+</SmellBaseline>
