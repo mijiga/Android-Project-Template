@@ -2,9 +2,9 @@
 
 An android project template that simplifies new project creation. Clone and get straight into your project.
 
-# Initial Setup 
+## Initial Setup 
 
-# Tech Stack 
+## Tech Stack 
 This template has out of the box setup for: 
 - Lint/Ktlint
 - Detekt for static code analysis
