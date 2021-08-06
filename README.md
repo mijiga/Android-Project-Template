@@ -6,10 +6,14 @@ An Android Project Template for creating new Android Projects with out of the bo
 
 ## Tech Stack  
 ### Libraries
-- Dagger-Hilt for dependency injection
-- Firebase Analytics
-- Firebase Crashlytics
-- Firebase Perfomance
+* Retrofit
+* Coroutines
+* Jetpack
+    * LiveData
+    * LifeCycle
+    * ViewModel
+* Dagger-Hilt for dependency injection
+
 ### Plugins
 - Lint/Ktlint
 - Detekt for static code analysis
